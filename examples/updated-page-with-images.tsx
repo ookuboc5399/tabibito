@@ -4,41 +4,40 @@ import { FeaturedSlider } from "@/components/home/featured-slider";
 import { DestinationCard } from "@/components/destinations/destination-card";
 import { NewsCard } from "@/components/news/news-card";
 import { Button } from "@/components/ui/button";
-import { getDestinations, getNews, getFeaturedItems } from "@/lib/services";
 
-// 仮のデータ（Supabaseが設定されていない場合のフォールバック）
-const fallbackFeaturedItems = [
+// 画像パスを更新したデータ
+const featuredItems = [
   {
     id: "1",
     title: "浜松ぶらり旅",
     subtitle: "出世の街で歴史と文化を感じる旅",
-    imageUrl: "/images/slider/hamamatsu.png",
+    imageUrl: "/images/slider/hamamatsu.jpg", // 更新されたパス
     link: "/destinations/1",
   },
   {
     id: "2",
     title: "京都の古都散策",
     subtitle: "千年の歴史が息づく街並みを巡る",
-    imageUrl: "/images/slider/kyoto.png",
+    imageUrl: "/images/slider/kyoto.jpg", // 更新されたパス
     link: "/destinations/2",
   },
   {
     id: "3",
     title: "沖縄の海を満喫",
     subtitle: "エメラルドグリーンの海と白い砂浜",
-    imageUrl: "/images/slider/okinawa.png",
+    imageUrl: "/images/slider/okinawa.jpg", // 更新されたパス
     link: "/destinations/3",
   },
 ];
 
-// 仮の旅行先データ（Supabaseが設定されていない場合のフォールバック）
-const fallbackDestinations = [
+// 更新された旅行先データ
+const popularDestinations = [
   {
     id: "1",
     name: "浜松",
     prefecture: "静岡県",
     description: "浜松城や浜名湖など、歴史と自然が楽しめる街。うなぎや餃子などのグルメも魅力です。",
-    image_url: "/images/destinations/hamamatsu.png",
+    image_url: "/images/destinations/hamamatsu.jpg", // 更新されたパス
     created_at: "2025-01-01",
   },
   {
@@ -46,7 +45,7 @@ const fallbackDestinations = [
     name: "京都",
     prefecture: "京都府",
     description: "金閣寺や清水寺など、歴史的な建造物が多く残る古都。四季折々の美しい景色が楽しめます。",
-    image_url: "/images/destinations/kyoto.png",
+    image_url: "/images/destinations/kyoto.jpg", // 更新されたパス
     created_at: "2025-01-02",
   },
   {
@@ -54,7 +53,7 @@ const fallbackDestinations = [
     name: "沖縄",
     prefecture: "沖縄県",
     description: "美しいビーチと透明度の高い海が魅力。独自の文化や歴史も楽しめる南国リゾート。",
-    image_url: "/images/destinations/okinawa.png",
+    image_url: "/images/destinations/okinawa.jpg", // 更新されたパス
     created_at: "2025-01-03",
   },
   {
@@ -62,18 +61,18 @@ const fallbackDestinations = [
     name: "北海道",
     prefecture: "北海道",
     description: "広大な自然と美味しい食べ物が魅力。夏は涼しく、冬はウィンタースポーツが楽しめます。",
-    image_url: "/images/destinations/hokkaido.png",
+    image_url: "/images/destinations/hokkaido.jpg", // 更新されたパス
     created_at: "2025-01-04",
   },
 ];
 
-// 仮のニュースデータ（Supabaseが設定されていない場合のフォールバック）
-const fallbackNews = [
+// 更新されたニュースデータ
+const latestNews = [
   {
     id: "1",
     title: "松本穂香さんが表紙・巻頭に登場する『月刊旅人2025年3月号』が公開",
     content: "女優・松本穂香さんが表紙と巻頭グラビアを飾る最新号が発売されました。",
-    image_url: "/images/news/magazine.png",
+    image_url: "/images/news/magazine.jpg", // 更新されたパス
     published_at: "2025-02-25",
     created_at: "2025-02-25",
   },
@@ -81,48 +80,13 @@ const fallbackNews = [
     id: "2",
     title: "『旅人FOCAL浜松特集』が公開！",
     content: "静岡県浜松市の魅力を余すことなく紹介する特集が公開されました。",
-    image_url: "/images/news/hamamatsu-feature.png",
+    image_url: "/images/news/hamamatsu-feature.jpg", // 更新されたパス
     published_at: "2025-02-10",
     created_at: "2025-02-10",
   },
 ];
 
-export default async function Home() {
-  // Supabaseからデータを取得（エラーが発生した場合はフォールバックデータを使用）
-  let featuredItems = fallbackFeaturedItems;
-  let popularDestinations = fallbackDestinations;
-  let latestNews = fallbackNews;
-
-  try {
-    // 特集スライダー用のデータを取得
-    const fetchedFeaturedItems = await getFeaturedItems();
-    if (fetchedFeaturedItems && fetchedFeaturedItems.length > 0) {
-      featuredItems = fetchedFeaturedItems;
-    }
-  } catch (error) {
-    console.error('特集アイテムの取得に失敗しました:', error);
-  }
-
-  try {
-    // 旅行先データを取得
-    const fetchedDestinations = await getDestinations();
-    if (fetchedDestinations && fetchedDestinations.length > 0) {
-      popularDestinations = fetchedDestinations.slice(0, 4); // 最新の4件を表示
-    }
-  } catch (error) {
-    console.error('旅行先データの取得に失敗しました:', error);
-  }
-
-  try {
-    // ニュースデータを取得
-    const fetchedNews = await getNews();
-    if (fetchedNews && fetchedNews.length > 0) {
-      latestNews = fetchedNews.slice(0, 2); // 最新の2件を表示
-    }
-  } catch (error) {
-    console.error('ニュースデータの取得に失敗しました:', error);
-  }
-
+export default function Home() {
   return (
     <div className="pb-16">
       {/* スライダーセクション */}
@@ -156,10 +120,9 @@ export default async function Home() {
               <div className="overflow-hidden rounded-lg bg-white p-4 text-center shadow transition-all hover:shadow-md">
                 <div className="relative mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 p-4">
                   <Image
-                    src="/images/categories/hotel.png"
+                    src="/images/categories/hotel.jpg" // 更新されたパス
                     alt="旅館・ホテル"
-                    width={64}
-                    height={64}
+                    fill
                     className="object-cover"
                   />
                 </div>
@@ -170,10 +133,9 @@ export default async function Home() {
               <div className="overflow-hidden rounded-lg bg-white p-4 text-center shadow transition-all hover:shadow-md">
                 <div className="relative mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 p-4">
                   <Image
-                    src="/images/categories/restaurant.png"
+                    src="/images/categories/restaurant.jpg" // 更新されたパス
                     alt="飲食店"
-                    width={64}
-                    height={64}
+                    fill
                     className="object-cover"
                   />
                 </div>
@@ -184,10 +146,9 @@ export default async function Home() {
               <div className="overflow-hidden rounded-lg bg-white p-4 text-center shadow transition-all hover:shadow-md">
                 <div className="relative mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 p-4">
                   <Image
-                    src="/images/categories/leisure.png"
+                    src="/images/categories/leisure.jpg" // 更新されたパス
                     alt="レジャー"
-                    width={64}
-                    height={64}
+                    fill
                     className="object-cover"
                   />
                 </div>
@@ -198,10 +159,9 @@ export default async function Home() {
               <div className="overflow-hidden rounded-lg bg-white p-4 text-center shadow transition-all hover:shadow-md">
                 <div className="relative mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 p-4">
                   <Image
-                    src="/images/categories/onsen.png"
+                    src="/images/categories/onsen.jpg" // 更新されたパス
                     alt="温泉"
-                    width={64}
-                    height={64}
+                    fill
                     className="object-cover"
                   />
                 </div>

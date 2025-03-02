@@ -1,24 +1,40 @@
-@import "tailwindcss";
-
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+}
+
+/* プライマリカラー */
+.text-primary {
+  color: #FF6B6B;
+}
+
+.bg-primary {
+  background-color: #FF6B6B;
+}
+
+.hover\:text-primary:hover {
+  color: #FF6B6B;
+}
+
+.hover\:bg-primary:hover {
+  background-color: #FF6B6B;
+}
+
+/* セカンダリカラー */
+.text-secondary {
+  color: #4ECDC4;
+}
+
+.bg-secondary {
+  background-color: #4ECDC4;
 }
