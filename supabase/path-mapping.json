@@ -1,0 +1,67 @@
+[
+  {
+    "originalPath": "categories/hotel.png",
+    "storagePath": "categories_hotel.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/categories_hotel.png"
+  },
+  {
+    "originalPath": "categories/leisure.png",
+    "storagePath": "categories_leisure.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/categories_leisure.png"
+  },
+  {
+    "originalPath": "categories/onsen.png",
+    "storagePath": "categories_onsen.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/categories_onsen.png"
+  },
+  {
+    "originalPath": "categories/restaurant.png",
+    "storagePath": "categories_restaurant.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/categories_restaurant.png"
+  },
+  {
+    "originalPath": "destinations/hamamatsu.png",
+    "storagePath": "destinations_hamamatsu.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/destinations_hamamatsu.png"
+  },
+  {
+    "originalPath": "destinations/hokkaido.png",
+    "storagePath": "destinations_hokkaido.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/destinations_hokkaido.png"
+  },
+  {
+    "originalPath": "destinations/kyoto.png",
+    "storagePath": "destinations_kyoto.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/destinations_kyoto.png"
+  },
+  {
+    "originalPath": "destinations/okinawa.png",
+    "storagePath": "destinations_okinawa.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/destinations_okinawa.png"
+  },
+  {
+    "originalPath": "news/hamamatsu-feature.png",
+    "storagePath": "news_hamamatsu-feature.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/news_hamamatsu-feature.png"
+  },
+  {
+    "originalPath": "news/magazine.png",
+    "storagePath": "news_magazine.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/news_magazine.png"
+  },
+  {
+    "originalPath": "slider/hamamatsu.png",
+    "storagePath": "slider_hamamatsu.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/slider_hamamatsu.png"
+  },
+  {
+    "originalPath": "slider/kyoto.png",
+    "storagePath": "slider_kyoto.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/slider_kyoto.png"
+  },
+  {
+    "originalPath": "slider/okinawa.png",
+    "storagePath": "slider_okinawa.png",
+    "publicUrl": "https://pjvklqgqysqomnafqknf.supabase.co/storage/v1/object/public/tabibito-images/slider_okinawa.png"
+  }
+]

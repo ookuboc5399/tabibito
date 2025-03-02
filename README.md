@@ -54,9 +54,17 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=あなたのSupabase匿名キーを入力してく
 - SQLエディタを開き、`supabase/schema.sql`の内容を実行してテーブルを作成します
 - ストレージバケット`tabibito-images`を作成し、公開アクセスを許可します
 
-5. 画像のアップロード
+5. Supabaseストレージのセットアップ
 
-以下のコマンドを実行して、画像をSupabaseのストレージにアップロードします：
+Supabaseダッシュボードで以下の設定を行います：
+
+- Storage > Buckets に移動し、`tabibito-images`バケットが存在することを確認します
+- Policies タブに移動し、以下のRLSポリシーを設定します：
+  - SELECT（読み取り）: 匿名ユーザーに許可
+  - INSERT（挿入）: 匿名ユーザーに許可
+  - UPDATE（更新）: 匿名ユーザーに許可
+
+または、アップロードスクリプトを実行して自動的に設定することもできます：
 
 ```bash
 # dotenvパッケージをインストール
@@ -73,6 +81,39 @@ npm run dev
 ```
 
 ブラウザで[http://localhost:3000](http://localhost:3000)を開いて、アプリケーションを確認できます。
+
+## 画像管理の仕組み
+
+### ディレクトリ構造
+
+画像は`public/images/`ディレクトリに以下のような構造で保存されています：
+
+```
+public/images/
+├── categories/     # カテゴリアイコン
+├── destinations/   # 旅行先の画像
+├── news/           # ニュース記事の画像
+└── slider/         # トップページのスライダー画像
+```
+
+### Supabaseストレージへのアップロード
+
+画像をSupabaseのストレージにアップロードする際、ディレクトリ構造を保持するために、ファイル名にディレクトリ名を含める形式を採用しています：
+
+- 元のパス: `slider/hamamatsu.png`
+- ストレージ内のパス: `slider_hamamatsu.png`
+
+これにより、異なるディレクトリにある同名の画像ファイルを区別できます。
+
+### パスマッピング
+
+元のパスとストレージ内のパスのマッピングは、`supabase/path-mapping.json`ファイルに保存されます。このファイルは、`scripts/upload-images.js`スクリプトを実行すると自動的に生成されます。
+
+### 画像URL取得の流れ
+
+1. アプリケーションでは元のパス（`/images/slider/hamamatsu.png`）を使用
+2. `getImageUrl`関数がパスマッピングを参照して正しいURLを返却
+3. Supabaseストレージが設定されていない場合は、ローカルの画像パスを使用
 
 ## プロジェクト構造
 
@@ -98,7 +139,8 @@ tabibito/
 ├── scripts/              # スクリプト
 │   └── upload-images.js  # 画像アップロードスクリプト
 ├── supabase/             # Supabase関連ファイル
-│   └── schema.sql        # データベーススキーマ
+│   ├── schema.sql        # データベーススキーマ
+│   └── path-mapping.json # 画像パスマッピング（自動生成）
 └── types/                # TypeScript型定義
     └── supabase.ts       # Supabaseの型定義
 ```
@@ -112,16 +154,22 @@ tabibito/
 3. 環境変数を設定します
 4. デプロイします
 
-## 画像について
+## トラブルシューティング
 
-画像は以下の2つの方法で提供されます：
+### 画像アップロードエラー
 
-1. **ローカル開発時**: `public/images/`ディレクトリ内の画像ファイルを使用
-2. **本番環境**: Supabaseのストレージに保存された画像を使用
+「new row violates row-level security policy」エラーが発生した場合：
 
-画像をSupabaseのストレージにアップロードするには、`scripts/upload-images.js`スクリプトを使用します。
+1. Supabaseダッシュボードにログインします
+2. Storage > Policies に移動します
+3. `tabibito-images`バケットに対して、INSERT, SELECT, UPDATEのポリシーを設定します
+
+### 画像が表示されない
+
+1. `.env.local`ファイルのSupabase認証情報が正しいか確認します
+2. `scripts/upload-images.js`スクリプトを実行して画像をアップロードします
+3. Supabaseダッシュボードで`tabibito-images`バケットに画像がアップロードされているか確認します
 
 ## ライセンス
 
 このプロジェクトはMITライセンスの下で公開されています。
-# tabibito
